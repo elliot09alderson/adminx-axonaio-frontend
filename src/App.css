@@ -1,0 +1,98 @@
+.red-blast{
+
+    background: -webkit-linear-gradient(to right, #1F1C18, #8E0E00);
+   background: linear-gradient(to right, #1F1C18, #8E0E00);
+   }
+
+
+   .beyond-blast{
+    background: #F0F2F0;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #000C40, #F0F2F0);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #000C40, #F0F2F0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+   }
+
+   .text-beyond{
+       color: #F0F2F0;
+    }
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    .example::-webkit-scrollbar {
+        display: none;
+      }
+    /* Firefox */
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+
+
+
+    /* kachra   */
+.steps{--size:2rem;--line:0.25rem;align-items:baseline;display:flex}.steps.line-space{--space:0.5rem}.steps .step{display:flex;flex:1 1 0%;flex-direction:column;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;letter-spacing:.025em;overflow-wrap:break-word;text-align:center}.steps .step .step-header{align-items:center;display:flex;flex-shrink:0;height:var(--size);justify-content:center;margin:auto auto .5rem;position:relative;width:var(--size)}.steps .step:not(:last-child):before{--tw-content:"";border-radius:9999px;content:var(--tw-content);height:var(--line);left:50%;order:-1;position:relative;top:calc(var(--size)/2 + var(--line)/2)}.steps.line-space .step:not(:last-child):before{left:calc(50% + var(--size)/2 + var(--space));width:calc(100% - var(--size) - var(--space)*2)}.steps.is-vertical{flex-direction:column}.steps.is-vertical .step{flex-direction:row;position:relative}.steps.is-vertical .step .step-header{margin:0;z-index:1}.steps.is-vertical .step:not(:last-child):before{--tw-translate-x:calc(var(--size)/2 - var(--line)/2);bottom:0;height:auto;left:0;position:absolute;right:0;top:0;transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));width:var(--line)}.steps.is-vertical.line-space .step:not(:last-child):before{bottom:var(--space);top:calc(var(--size) + var(--space))}
+.timeline{--line:1px;--size:12px;display:flex;flex-direction:column}.timeline.line-space{--space:12px}.timeline .timeline-item{display:flex;flex:1 1 0%;padding-bottom:2rem;position:relative}.timeline .timeline-item .timeline-item-point{align-items:center;display:flex;flex-shrink:0;height:var(--size);justify-content:center;margin:0;position:relative;width:var(--size)}.timeline .timeline-item:before{--tw-translate-x:calc(var(--size)/2 - var(--line)/2);--tw-content:"";bottom:0;content:var(--tw-content);left:0;order:-1;position:absolute;right:0;top:0;transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));width:var(--line)}.timeline .timeline-item:not(:last-child):before{background-color:#cbd5e1}.dark .timeline .timeline-item:not(:last-child):before{background-color:#5c6b8a}.timeline .timeline-item:last-child:before{--tw-gradient-from:#cbd5e1;--tw-gradient-to:rgba(203,213,225,0);--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to);--tw-gradient-to:transparent;background-image:linear-gradient(to bottom,var(--tw-gradient-stops))}.dark .timeline .timeline-item:last-child:before{--tw-gradient-from:#5c6b8a;--tw-gradient-to:rgba(92,107,138,0);--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to)}.timeline .timeline-item:last-child{padding-bottom:0}.timeline.line-space .timeline-item:before{bottom:var(--space);top:calc(var(--size) + var(--space))}
+.pagination{color:#475569;display:flex;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;font-weight:500}.dark .pagination{color:#c2c9d6}
+
+
+
+.custom-datetime-picker .MuiInputBase-input {
+  color: white;
+  font-weight: 200;
+}
+
+.custom-datetime-picker .MuiInputLabel-root {
+  color: white;
+  font-weight: 200;
+
+}
+
+.custom-datetime-picker .MuiIconButton-root {
+  color: white;
+  font-weight: 200;
+
+}
+.custom-datetime-picker .MuiOutlinedInput-root {
+  fieldset {
+    border-color: white;
+  border-radius:10px;
+
+  }
+}
+
+.custom-datetime-picker .MuiOutlinedInput-root.Mui-focused fieldset {
+  border-color: white;
+  outline: none;
+}
+
+/* multi input  */
+
+.custom-select .MuiOutlinedInput-notchedOutline {
+  border-color: white !important;
+  color: white !important;
+
+}
+
+
+.custom-select .MuiSelect-select{
+  border-color: white !important;
+  color: white !important;
+}
+.custom-select label{
+  color: white !important;
+}
+
+
+.custom-select .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+  border-color: white;
+  color: white;
+
+}
+.MuiInputLabel-shrink .Mui-focused{
+  color: white;
+}
+.custom-select .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: white;
+  color: white;
+}
