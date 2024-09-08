@@ -57,11 +57,49 @@ const MerchantTable = () => {
       type: "string",
     },
     {
+      field: "isResellerAdmin",
+      headerName: "Reseller Admin",
+      width: 200,
+      type: "string",
+      renderCell: (params) => {
+        console.log(params.row);
+        return (
+          <div
+            className={` text-white font-semibold px-4 text-center rounded-lg min-w-28 ${
+              params?.row?.is_reseller_admin ? "bg-green-400 " : " bg-red-400 "
+            }`}
+          >
+            {params?.row?.is_reseller_admin ? "true" : "false"}
+          </div>
+        );
+      },
+    },
+    {
+      field: "isReseller",
+      headerName: "Reseller",
+      width: 200,
+      type: "string",
+      renderCell: (params) => {
+        console.log(params.row);
+        return (
+          <div
+            className={` text-white font-semibold px-4 text-center rounded-lg min-w-28 ${
+              params?.row?.is_reseller ? "bg-green-400 " : " bg-red-400 "
+            }`}
+          >
+            {params?.row?.is_reseller ? "true" : "false"}
+          </div>
+        );
+      },
+    },
+
+    {
       field: "Mode",
       headerName: "Live Mode Access",
       width: 200,
       type: "string",
       renderCell: (params) => {
+        console.log(params.row);
         return (
           <div
             className={` text-white font-semibold px-4 text-center rounded-lg min-w-28 ${

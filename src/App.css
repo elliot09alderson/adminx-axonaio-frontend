@@ -96,3 +96,35 @@ background: linear-gradient(to right, #000C40, #F0F2F0); /* W3C, IE 10+/ Edge, F
   border-color: white;
   color: white;
 }
+
+
+
+.swal2-popup {
+  background-color: #0f172a !important; /* Change to your desired color */
+  border: #1e293b;
+}
+
+.swal2-title {
+  color: white !important; /* Optional: Change title text color */
+}
+
+.swal2-input {
+  background-color: #0f172a !important;
+  color: white !important;
+  border: 2px solid #222222 !important;
+  border-radius: 20px !important;
+}
+
+
+.swal2-input:focus {
+  border: 2px solid #313e54 !important;
+}
+.swal2-confirm{
+  background-color: #1e293b !important; color: #ffffff !important; 
+}
+.swal2-confirm:hover {
+  background-color: #334155 !important; /* Optional: Darker shade for hover */
+}
+.swal2-cancel{
+  background-color: rgb(111, 43, 43) !important; color: #ffffff !important; 
+}

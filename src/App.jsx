@@ -27,6 +27,12 @@ import ManageEmployee from "./pages/ManageEmployee/ManageEmployee";
 import { ToastContainer } from "react-toastify";
 import NotAuthorized from "./pages/NotAuthorized/NotAuthorized";
 import Profile from "./pages/Admin/Profile";
+import RiskAndCompliance from "./pages/Risk&Compliance/RiskAndCompliance";
+import VerifyMerchant from "./pages/Risk&Compliance/components/VerifyMerchant";
+import ManageReseller from "./pages/ManageReseller/ManageReseller";
+import ViewMerchantDetails from "./pages/ManageReseller/ViewMerchantDetails/ViewMerchantDetails";
+import ManageResellerAdmin from "./pages/ManageResellerAdmin/ManageResellerAdmin";
+import MerchantSettings from "./pages/MerchantSettings/MerchantSettings";
 const App = () => {
   const { isAuthenticated, user, role, loader, successMessage, errorMessage } =
     useSelector((state) => state.auth);
@@ -64,10 +70,7 @@ const App = () => {
       path: "/admin/login",
       element: <AdminLogin />,
     },
-    {
-      path: "/admin/settings",
-      element: <AdminSettings />,
-    },
+
     {
       path: "/not-authorized",
       element: <NotAuthorized />,
@@ -92,9 +95,30 @@ const App = () => {
             </PermissionProtector>
           ),
         },
+
+        {
+          path: "managereseller",
+          element: (
+            <PermissionProtector
+              permissions={user?.permissions}
+              requiredPermission="manage Reseller"
+              isSuperAdmin={user?.role == "super_admin"}
+            >
+              <ManageReseller />,
+            </PermissionProtector>
+          ),
+        },
+        {
+          path: "managereseller/viewdetails/:id",
+          element: <ViewMerchantDetails />,
+        },
         {
           path: "profile",
           element: <Profile />,
+        },
+        {
+          path: "merchantsettings",
+          element: <MerchantSettings />,
         },
 
         {
@@ -147,6 +171,18 @@ const App = () => {
           ),
         },
         {
+          path: "reselleradmin",
+          element: (
+            <PermissionProtector
+              permissions={user?.permissions}
+              requiredPermission="manage ResellerAdmin"
+              isSuperAdmin={user?.role == "super_admin"}
+            >
+              <ManageResellerAdmin />
+            </PermissionProtector>
+          ),
+        },
+        {
           path: "managevendor",
           element: (
             <PermissionProtector
@@ -158,6 +194,33 @@ const App = () => {
             </PermissionProtector>
           ),
         },
+        {
+          path: "risk&compliance",
+          element: (
+            <PermissionProtector
+              permissions={user?.permissions}
+              requiredPermission="manage RiskAndCompliance"
+              isSuperAdmin={user?.role == "super_admin"}
+            >
+              <RiskAndCompliance />
+            </PermissionProtector>
+          ),
+          children: [
+            {
+              path: "editmerchant/:merchantId",
+              element: (
+                <PermissionProtector
+                  permissions={user?.permissions}
+                  requiredPermission="edit Merchant"
+                  isSuperAdmin={user?.role == "super_admin"}
+                >
+                  <VerifyMerchant />
+                </PermissionProtector>
+              ),
+            },
+          ],
+        },
+
         {
           path: "dashboard",
           element: <AdminDashboard />, // Default component for /admin/dashboard

@@ -10,6 +10,9 @@ import settlementSlice from "./slices/settlement/settlementSlice.js";
 import dashboardSlice from "./slices/dashboard/dashboardSlice.js";
 import employeeSlice from "./slices/employeeSlice/employeeSlice.js";
 import appSlice from "./slices/appSlice/appSlice.js";
+import resellerSlice from "./slices/resellerSlice/resellerSlice.js";
+import resellerAdminSlice from "./slices/resellerAdminSlice/resellerAdminSlice.js";
+import merchantSettingSlice from "./slices/merchantSettingSlice/merchantSettingSlice.js";
 
 const store = configureStore({
   reducer: {
@@ -24,6 +27,9 @@ const store = configureStore({
     dashboard: dashboardSlice,
     employee: employeeSlice,
     app: appSlice,
+    reseller: resellerSlice,
+    reselleradmin: resellerAdminSlice,
+    merchantsettings: merchantSettingSlice,
   },
 });
 

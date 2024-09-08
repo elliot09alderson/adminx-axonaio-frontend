@@ -7,7 +7,11 @@ const Profile = () => {
     <div className=" w-full h-screen flex flex-col items-center justify-center ">
       <div className="w-full  flex p-8 lg:px-24 items-center justify-evenly gap-8 lg:gap-12">
         <div className="rounded-xl  w-[60%] h-[50vh] bg-slate-800 flex flex-col items-center justify-center">
-          <div className="w-64 h-64 bg-slate-800 absolute rounded-full top-32 border-[8px] border-slate-950"></div>
+          <div className="w-64 h-64 bg-slate-800 absolute flex items-center justify-center rounded-full top-32 border-[8px] border-slate-950">
+            <h1 className="text-white text-7xl uppercase">
+              {user?.first_name[0] + user.last_name[0]}
+            </h1>
+          </div>
           {/* <h1 className="text-slate-200 text-4xl my-4 ">Admin Details</h1> */}
           <div className="flex justify-between gap-20 items-center">
             <div className="flex flex-col gap-5  justify-between lg:text-lg text-base text-slate-400 ">

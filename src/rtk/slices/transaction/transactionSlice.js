@@ -44,7 +44,7 @@ const transactionSlice = createSlice({
       })
       .addCase(fetchTransactions.rejected, (state, { payload }) => {
         state.loader = false;
-        state.errorMessage = payload.error;
+        // state.errorMessage = payload.error;
       });
   },
 });

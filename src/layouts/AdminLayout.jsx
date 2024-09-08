@@ -13,6 +13,9 @@ import {
   UserRoundPlus,
   Landmark,
 } from "lucide-react";
+import { MdManageAccounts } from "react-icons/md";
+import { GrShieldSecurity } from "react-icons/gr";
+import { TfiHeadphoneAlt } from "react-icons/tfi";
 
 import { useSelector } from "react-redux";
 
@@ -69,12 +72,12 @@ const menus = [
   {
     icon: <UserRoundPlus size={20} />,
     text: "Manage Resellers",
-    to: "/admin/reseller",
+    to: "/admin/managereseller",
     // alert: true,
     permission: "manage Resellers",
   },
   {
-    icon: <Settings size={20} />,
+    icon: <GrShieldSecurity size={20} />,
     text: "Manage Resellers Admin",
     to: "/admin/reselleradmin",
     // alert: true,
@@ -82,13 +85,20 @@ const menus = [
   },
   {
     icon: <Settings size={20} />,
+    text: "Merchant Settings",
+    to: "/admin/merchantsettings",
+    // alert: true,
+    permission: "Merchant settings",
+  },
+  {
+    icon: <TfiHeadphoneAlt size={20} />,
     text: "Manage Risk & Compliance",
-    to: "/admin/riskcomplaience",
+    to: "/admin/risk&compliance",
     // alert: true,
     permission: "manage Risk & Compliance",
   },
   {
-    icon: <Settings size={20} />,
+    icon: <MdManageAccounts size={20} />,
     text: "Accounts",
     to: "/admin/accounts",
     // alert: true,
@@ -107,9 +117,7 @@ const AdminLayout = () => {
   const { sidebarExtended } = useSelector((state) => state.utils);
   const { isAuthenticated, user, role, loader, successMessage, errorMessage } =
     useSelector((state) => state.auth);
-  useEffect(() => {
-    console.log(user), [];
-  });
+
   const [active, setActive] = useState(0);
   return (
     <div className="w-full bg-slate-100 dark:bg-slate-950  h-full flex bg-dashboard ">
@@ -146,7 +154,7 @@ const AdminLayout = () => {
         </Sidebar>
       </aside>
       <main
-        className={`h-screen py-4 lg:pr-4 pr-0 dark:bg-slate-950  ${
+        className={`h-full min-h-screen py-4 lg:pr-4 pr-0 dark:bg-slate-950  ${
           sidebarExtended
             ? " lg:w-[86vw] lg:ml-[16vw]  "
             : "lg:w-[95vw] lg:ml-[5vw]  w-[84vw] ml-[16vw] "
