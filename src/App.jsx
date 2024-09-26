@@ -33,6 +33,7 @@ import ManageReseller from "./pages/ManageReseller/ManageReseller";
 import ViewMerchantDetails from "./pages/ManageReseller/ViewMerchantDetails/ViewMerchantDetails";
 import ManageResellerAdmin from "./pages/ManageResellerAdmin/ManageResellerAdmin";
 import MerchantSettings from "./pages/MerchantSettings/MerchantSettings";
+import ManageAccounts from "./pages/ManageAccounts/Whitelist";
 const App = () => {
   const { isAuthenticated, user, role, loader, successMessage, errorMessage } =
     useSelector((state) => state.auth);
@@ -117,8 +118,8 @@ const App = () => {
           element: <Profile />,
         },
         {
-          path: "merchantsettings",
-          element: <MerchantSettings />,
+          path: "settings",
+          element: <AdminSettings />,
         },
 
         {
@@ -155,6 +156,18 @@ const App = () => {
               isSuperAdmin={user?.role == "super_admin"}
             >
               <ManageEmployee />,
+            </PermissionProtector>
+          ),
+        },
+        {
+          path: "manageaccounts",
+          element: (
+            <PermissionProtector
+              permissions={user?.permissions} // this is the permissions array
+              requiredPermission="manage Accounts"
+              isSuperAdmin={user?.role == "super_admin"}
+            >
+              <ManageAccounts />,
             </PermissionProtector>
           ),
         },

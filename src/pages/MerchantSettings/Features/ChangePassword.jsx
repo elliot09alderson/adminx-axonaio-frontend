@@ -8,45 +8,25 @@ import { Modal, Label, TextInput } from "flowbite-react";
 import DataTable from "../../../components/table/dataTable/DataTable";
 
 import { Link } from "react-router-dom";
-import {
-  fetchResellerAdmin,
-  makeResellerAdmin,
-  populateResellerAdmins_Reseller,
-} from "../../../rtk/slices/resellerAdminSlice/resellerAdminSlice";
+
+import { changeMerchantPasscode } from "../../../rtk/slices/merchantSettingSlice/merchantSettingSlice";
+import { fetchMerchant } from "../../../rtk/slices/adminSlice/MerchantSlice";
 const ChangePassword = () => {
   const dispatch = useDispatch();
   const [openModal, setOpenModal] = useState(false);
 
-  const [selectResellerAdmin, setSelectResellerAdmin] = useState("");
-  const [freshMerchant, setFreshMerchant] = useState("");
+  useEffect(() => {
+    dispatch(fetchMerchant());
+  }, []);
   const { merchants, successMessage, errorMessage } = useSelector(
     (slice) => slice.merchant
   );
-
   /* -------------------------SELECTORS ------------------------ */
 
-  useEffect(() => {
-    dispatch(fetchResellerAdmin());
-  }, []);
-
-  useEffect(() => {
-    dispatch(
-      populateResellerAdmins_Reseller({ resellerAdminId: selectResellerAdmin })
-    );
-  }, [selectResellerAdmin]);
-
-  const {
-    resellers,
-    resellerAdmins,
-    resellersMerchant,
-    freshResellers,
-    resellerAdminMerchants,
-    loader,
-    freshMerchants,
-  } = useSelector((slice) => slice.reselleradmin);
-
   const initialValues = {
-    resellerId: "",
+    merchantId: "",
+    newPassword: "",
+    confirmNewPassword: "",
   };
   const columns = [
     {
@@ -110,7 +90,11 @@ const ChangePassword = () => {
     },
   ];
   const validationSchema = Yup.object().shape({
-    resellerId: Yup.string().required("Reseller is required"),
+    merchantId: Yup.string().required("merchant is required"),
+    newPassword: Yup.string().required("new password is required"),
+    confirmNewPassword: Yup.string()
+      .oneOf([Yup.ref("newPassword"), null], "Passwords must match")
+      .required("Confirm Password is required"),
   });
 
   return (
@@ -148,15 +132,18 @@ const ChangePassword = () => {
           enableReinitialize={true}
           onSubmit={(values, { resetForm }) => {
             console.log(values);
-            dispatch(makeResellerAdmin({ resellerId: values.resellerId })).then(
-              (result) => {
-                if (result.payload.status) {
-                  resetForm();
-                  setOpenModal(false);
-                  // dispatch(fetchResellerAdmin());
-                }
+            dispatch(
+              changeMerchantPasscode({
+                merchantId: values.merchantId,
+                newPassword: values.newPassword,
+              })
+            ).then((result) => {
+              if (result.payload.status) {
+                resetForm();
+                setOpenModal(false);
+                // dispatch(fetchResellerAdmin());
               }
-            );
+            });
             alert(`Submitted values: ${JSON.stringify(values, null, 2)}`);
           }}
         >
@@ -171,18 +158,18 @@ const ChangePassword = () => {
                   <Field
                     as="select"
                     id="merchant"
-                    name="resellerId"
+                    name="merchantId"
                     className="rounded-lg h-12"
                   >
                     <option value="" label="Select User" />
                     {merchants.map((item) => (
-                      <option key={item.r_id} value={item.r_id}>
+                      <option key={item.m_id} value={item.m_id}>
                         {item.name}
                       </option>
                     ))}
                   </Field>
                   <ErrorMessage
-                    name="resellerId"
+                    name="merchantId"
                     component="p"
                     className="text-red-500 text-sm"
                   />
@@ -192,12 +179,12 @@ const ChangePassword = () => {
                   <Field
                     as={TextInput}
                     type="password"
-                    name="resellerId"
+                    name="newPassword"
                     className="rounded-lg h-12"
                   />
 
                   <ErrorMessage
-                    name="resellerId"
+                    name="newPassword"
                     component="p"
                     className="text-red-500 text-sm"
                   />
@@ -207,12 +194,12 @@ const ChangePassword = () => {
                   <Field
                     as={TextInput}
                     type="password"
-                    name="resellerId"
+                    name="confirmNewPassword"
                     className="rounded-lg h-12"
                   />
 
                   <ErrorMessage
-                    name="resellerId"
+                    name="confirmNewPassword"
                     component="p"
                     className="text-red-500 text-sm"
                   />
@@ -223,7 +210,7 @@ const ChangePassword = () => {
                 type="submit"
                 text=" Change Password"
                 className="w-full"
-                disabled={loader}
+                // disabled={loader}
               >
                 Change Password
               </Button>

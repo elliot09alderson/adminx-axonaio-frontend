@@ -4,7 +4,10 @@ import { useEffect, useRef, useState } from "react";
 import { Button } from "../../../components/Buttons/Buttons";
 import { Modal, Label, TextInput, Dropdown } from "flowbite-react";
 
-import { fetchApis } from "../../../rtk/slices/merchantSettingSlice/merchantSettingSlice.js";
+import {
+  fetchApi,
+  fetchWebhooks,
+} from "../../../rtk/slices/merchantSettingSlice/merchantSettingSlice.js";
 
 const ViewKeys = () => {
   const dispatch = useDispatch();
@@ -15,12 +18,20 @@ const ViewKeys = () => {
   const [openModal, setOpenModal] = useState(false);
 
   const { merchants } = useSelector((slice) => slice.merchant);
+
   const { payinwebhooks, payinapikeys, loader } = useSelector(
     (slice) => slice.merchantsettings
   );
   function xyz() {
-    setOpenModal(true);
-    dispatch(fetchApis({ datax: { app, mode, merchantId } }));
+    console.log("Asdasdasd");
+
+    dispatch(fetchApi({ datax: { app, mode, merchantId } })).then((res) => {
+      console.log(res.payload.status);
+      if (res.payload.status) {
+        setOpenModal(true);
+      }
+    });
+    console.log(payinapikeys);
   }
   return (
     <div className="flex gap-8 flex-col min-h-screen">
@@ -33,7 +44,7 @@ const ViewKeys = () => {
         >
           <option value="" label="select merchant" />
           {merchants.map((item, idx) => (
-            <option key={idx} value={item.m_id} label={item.name} />
+            <option key={idx + "a"} value={item.m_id} label={item.name} />
           ))}
         </select>
         <select
@@ -79,17 +90,28 @@ const ViewKeys = () => {
           </h1>
         </Modal.Header>
 
-        <div className="flex flex-col gap-4 pb-8 ">
-          {[1, 2, 3, 4].map((item) => (
-            <div className="flex flex-col gap-1 px-4">
-              <Label htmlFor="merchant">Select User</Label>
-              <input
-                id="merchant"
-                name="resellerId"
-                className="rounded-lg h-12"
-              />
-            </div>
-          ))}
+        <div className="flex flex-col gap-5 pb-8 ">
+          {payinapikeys.length > 0 &&
+            Object.entries(payinapikeys[0]).map(
+              ([key, value], index) =>
+                key != "_id" &&
+                key != "updatedAt" &&
+                key != "createdAt" &&
+                key != "__v" && (
+                  <div key={key} className="flex flex-col gap-1 px-4">
+                    <Label htmlFor="merchant" className=" pl-1">
+                      {key}
+                    </Label>
+                    <input
+                      id="merchant"
+                      value={value}
+                      name={key}
+                      disabled
+                      className="rounded-lg h-12 pl-2 bg-slate-950  text-white"
+                    />
+                  </div>
+                )
+            )}
         </div>
       </Modal>
     </div>

@@ -85,11 +85,12 @@ const menus = [
   },
   {
     icon: <Settings size={20} />,
-    text: "Merchant Settings",
-    to: "/admin/merchantsettings",
+    text: " Settings",
+    to: "/admin/settings",
     // alert: true,
     permission: "Merchant settings",
   },
+
   {
     icon: <TfiHeadphoneAlt size={20} />,
     text: "Manage Risk & Compliance",
@@ -100,7 +101,7 @@ const menus = [
   {
     icon: <MdManageAccounts size={20} />,
     text: "Accounts",
-    to: "/admin/accounts",
+    to: "/admin/manageaccounts",
     // alert: true,
     permission: "manage Accounts",
   },

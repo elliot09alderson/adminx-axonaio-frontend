@@ -116,7 +116,7 @@ const authSlice = createSlice({
       })
       .addCase(createApp.fulfilled, (state, { payload }) => {
         state.loader = false;
-        state.apps = payload.data;
+        state.apps = [...state.apps, payload.data];
 
         state.successMessage = "logged in successfully";
       })
@@ -125,7 +125,7 @@ const authSlice = createSlice({
       })
       .addCase(createApp.rejected, (state, { payload }) => {
         state.loader = false;
-        state.apps = payload.data;
+        // state.apps = payload.data;
 
         state.errorMessage = "check your internet connection";
       })

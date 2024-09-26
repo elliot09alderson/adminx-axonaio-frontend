@@ -1,22 +1,9 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useRef, useState } from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
 import { Button } from "../../../components/Buttons/Buttons";
 import { Modal, Label, TextInput, Dropdown } from "flowbite-react";
 
-import DataTable from "../../../components/table/dataTable/DataTable";
-
-import { Link } from "react-router-dom";
-import {
-  fetchResellerAdmin,
-  makeResellerAdmin,
-  populateResellerAdmins_Reseller,
-} from "../../../rtk/slices/resellerAdminSlice/resellerAdminSlice";
-import {
-  fetchApis,
-  fetchWebhooks,
-} from "../../../rtk/slices/merchantSettingSlice/merchantSettingSlice";
+import { fetchWebhooks } from "../../../rtk/slices/merchantSettingSlice/merchantSettingSlice";
 
 const ViewWebhooks = () => {
   const dispatch = useDispatch();
@@ -88,21 +75,23 @@ const ViewWebhooks = () => {
       >
         <Modal.Header>
           <h1 className="lg:text-2xl dark:text-white my-4 mb-6 ml-4">
-            Api Keys
+            Webhooks
           </h1>
         </Modal.Header>
 
         <div className="flex flex-col gap-4 pb-8 ">
-          {[1, 2, 3, 4].map((item) => (
-            <div className="flex flex-col gap-1 px-4">
-              <Label htmlFor="merchant">Select User</Label>
-              <input
-                id="merchant"
-                name="resellerId"
-                className="rounded-lg h-12"
-              />
-            </div>
-          ))}
+          {["localhost:5000", "http://youtube.com", "http://pinterest.com"].map(
+            (item, idx) => (
+              <div key={idx + "B"} className="flex flex-col gap-1 px-4">
+                <input
+                  id="merchant"
+                  value={item}
+                  name="resellerId"
+                  className="rounded-lg h-12 pl-2"
+                />
+              </div>
+            )
+          )}
         </div>
       </Modal>
     </div>

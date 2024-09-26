@@ -40,10 +40,7 @@ const ResellerDetailsTable = () => {
   );
   console.log("resellers= == = > ", resellers);
   const initialValues = {
-    merchant: "",
-    app: "",
-    payinFields: {},
-    payoutFields: {},
+    merchantId: "",
   };
   const columns = [
     {
@@ -101,35 +98,8 @@ const ResellerDetailsTable = () => {
     },
   ];
   const validationSchema = Yup.object().shape({
-    merchant: Yup.string().required("Merchant is required"),
-    app: Yup.string().required("App selection is required"),
-    payinFields: Yup.object().when("app", {
-      is: "Payin",
-      then: Yup.object().shape({
-        // Define validation for Payin fields here
-      }),
-    }),
-    payoutFields: Yup.object().when("app", {
-      is: "Payout",
-      then: Yup.object().shape({
-        // Define validation for Payout fields here
-      }),
-    }),
+    merchantId: Yup.string().required("Merchant is required"),
   });
-
-  const handleAppChange = (e, values, setValues) => {
-    const selectedApp = e.target.value;
-    const newValues = {
-      ...values,
-      app: selectedApp,
-      payinFields: {},
-      payoutFields: {},
-    };
-    setValues(newValues);
-    if (selectedApp) {
-      dispatch(fetchVendor({ app_mode: selectedApp }));
-    }
-  };
 
   return (
     <div className="flex gap-8 flex-col min-h-screen">
@@ -177,12 +147,15 @@ const ResellerDetailsTable = () => {
           validationSchema={validationSchema}
           enableReinitialize={true}
           onSubmit={(values, { resetForm }) => {
-            dispatch(createRoute({ datax: values })).then((result) => {
-              if (result.payload.status) {
-                resetForm();
-                console.log("inserted....");
+            dispatch(makeReseller({ merchantId: values.merchantId })).then(
+              (result) => {
+                if (result.payload.status) {
+                  resetForm();
+                  console.log("inserted....");
+                }
               }
-            });
+            );
+            setOpenModal(false);
             console.log(values);
             alert(`Submitted values: ${JSON.stringify(values, null, 2)}`);
           }}
@@ -198,11 +171,8 @@ const ResellerDetailsTable = () => {
                   <Field
                     as="select"
                     id="merchant"
-                    name="merchant"
+                    name="merchantId"
                     className="rounded-lg h-12"
-                    onChange={() => {
-                      setFreshMerchant(e.target.value);
-                    }}
                   >
                     <option value="" label="Select Merchant" />
                     {freshMerchants.map((item) => (
@@ -212,12 +182,12 @@ const ResellerDetailsTable = () => {
                     ))}
                   </Field>
                   <ErrorMessage
-                    name="merchant"
+                    name="merchantId"
                     component="p"
                     className="text-red-500 text-sm"
                   />
                 </div>
-                <div className="flex flex-col gap-1">
+                {/* <div className="flex flex-col gap-1">
                   <Label htmlFor="app">Set Pricing</Label>
                   <Field
                     as="select"
@@ -235,7 +205,7 @@ const ResellerDetailsTable = () => {
                     component="p"
                     className="text-red-500 text-sm"
                   />
-                </div>
+                </div> */}
               </div>
 
               <Button
